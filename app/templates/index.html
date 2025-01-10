@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-4xl font-extrabold mb-8 text-center animate__animated animate__fadeInDown">Algorithm Visualizer</h1>
+    
+    <!-- Buttons for Sorting and Palindrome Checker -->
+    <div class="flex justify-center space-x-4 mb-8">
+        <button id="showSorting" class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Sortings</button>
+        <button id="showPalindrome" class="px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Palindrome Checker</button>
+    </div>
+
+    <!-- Sorting Section -->
+    <div id="sortingSection" class="hidden">
+        <!-- Cards for Sorting Algorithms -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate__animated animate__fadeInUp">
+            <div class="bg-white p-6 rounded-lg shadow-md text-gray-800">
+                <h2 class="text-2xl font-semibold mb-2"><i class="fas fa-sort-numeric-down-alt"></i> Bubble Sort</h2>
+                <p class="text-gray-700">Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-gray-800">
+                <h2 class="text-2xl font-semibold mb-2"><i class="fas fa-sort-amount-down"></i> Selection Sort</h2>
+                <p class="text-gray-700">Selection Sort is an in-place comparison sorting algorithm. It divides the input list into two parts: the sublist of items already sorted and the sublist of items remaining to be sorted.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-gray-800">
+                <h2 class="text-2xl font-semibold mb-2"><i class="fas fa-sort-alpha-down"></i> Insertion Sort</h2>
+                <p class="text-gray-700">Insertion Sort is a simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms.</p>
+            </div>
+            <!-- Add more cards for additional algorithms if needed -->
+        </div>
+
+        <form id="sortForm" class="space-y-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-gray-800 animate__animated animate__fadeInUp">
+            <div>
+                <label for="array" class="block text-sm font-medium text-gray-700">Enter numbers (comma-separated):</label>
+                <input type="text" id="array" name="array" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            
+            <div>
+                <label for="algorithm" class="block text-sm font-medium text-gray-700">Choose a sorting algorithm:</label>
+                <select id="algorithm" name="algorithm" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                    <!-- Add more algorithms as needed -->
+                </select>
+            </div>
+            
+            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Visualize</button>
+        </form>
+        <div id="visualization" class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <!-- Visualization will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Palindrome Checker Section -->
+    <div id="palindromeSection" class="hidden">
+        <div class="bg-white p-6 rounded-lg shadow-md text-gray-800 mb-8">
+            <h2 class="text-2xl font-semibold mb-2"><i class="fas fa-text-width"></i> Palindrome Checker</h2>
+            <p class="text-gray-700">A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).</p>
+        </div>
+
+        <form id="palindromeForm" class="space-y-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-gray-800 animate__animated animate__fadeInUp">
+            <div>
+                <label for="text" class="block text-sm font-medium text-gray-700">Enter text to check:</label>
+                <input type="text" id="text" name="text" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            
+            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-pink-400 to-red-500 hover:from-pink-500 hover:to-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Check Palindrome</button>
+        </form>
+        <div id="palindromeResult" class="mt-8 max-w-lg mx-auto text-center">
+            <!-- Palindrome result will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('showSorting').addEventListener('click', function() {
+            document.getElementById('sortingSection').classList.remove('hidden');
+            document.getElementById('palindromeSection').classList.add('hidden');
+        });
+
+        document.getElementById('showPalindrome').addEventListener('click', function() {
+            document.getElementById('palindromeSection').classList.remove('hidden');
+            document.getElementById('sortingSection').classList.add('hidden');
+        });
+
+        document.getElementById('sortForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            const array = document.getElementById('array').value;
+            const algorithm = document.getElementById('algorithm').value;
+
+            fetch('/visualize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `array=${array}&algorithm=${algorithm}`
+            })
+            .then(response => response.json())
+            .then(steps => {
+                const visualizationDiv = document.getElementById('visualization');
+                visualizationDiv.innerHTML = ''; // Clear previous visualization
+
+                steps.forEach((step, index) => {
+                    setTimeout(() => {
+                        const [currentArray, explanation] = step;
+                        const stepDiv = document.createElement('div');
+                        stepDiv.className = "p-4 bg-white shadow rounded-md text-gray-800 animate__animated animate__fadeIn";
+
+                        const stepTitle = document.createElement('h2');
+                        stepTitle.className = "text-lg font-semibold";
+                        stepTitle.textContent = `Step ${index + 1}`;
+
+                        const stepContent = document.createElement('p');
+                        stepContent.className = "text-sm text-gray-700";
+                        stepContent.textContent = `Array: ${currentArray.join(', ')}`;
+
+                        const explanationContent = document.createElement('p');
+                        explanationContent.className = "text-sm text-gray-500 mt-2";
+                        explanationContent.textContent = `Explanation: ${explanation}`;
+
+                        stepDiv.appendChild(stepTitle);
+                        stepDiv.appendChild(stepContent);
+                        stepDiv.appendChild(explanationContent);
+                        visualizationDiv.appendChild(stepDiv);
+                    }, index * 1000); // Delay of 1000ms (1 second) between each step
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('palindromeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            const text = document.getElementById('text').value;
+
+            fetch('/check_palindrome', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `text=${text}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('palindromeResult');
+                resultDiv.innerHTML = ''; // Clear previous result
+
+                const resultMessage = document.createElement('p');
+                resultMessage.className = "text-lg font-semibold";
+                resultMessage.textContent = data.is_palindrome ? `"${data.text}" is a palindrome!` : `"${data.text}" is not a palindrome.`;
+
+                resultDiv.appendChild(resultMessage);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+{% endblock %}
