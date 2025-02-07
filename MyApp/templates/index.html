@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="task-header text-center">
+    <div class="container">
+        <h1 class="display-4 mb-4">Task Manager with Priority Queue</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="concept-box p-4 rounded-3">
+                    <h2 class="concept-title mb-3">Priority Queue Implementation</h2>
+                    <div class="concept-content">
+                        <div class="feature-list">
+                            <div class="feature-item mb-3">
+                                <i class="fas fa-layer-group feature-icon"></i>
+                                <h3>Priority-Based Organization</h3>
+                                <p>Tasks are automatically sorted using a Priority Queue data structure, ensuring high-priority tasks are always at the forefront.</p>
+                            </div>
+                            <div class="feature-item mb-3">
+                                <i class="fas fa-sort-amount-down feature-icon"></i>
+                                <h3>Efficient Task Management</h3>
+                                <p>Three-tier priority system (High → Medium → Low) for optimal task scheduling and resource allocation.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clock feature-icon"></i>
+                                <h3>Real-Time Processing</h3>
+                                <p>Instant task reorganization and priority-based sorting for dynamic task management.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="stats-card card bg-primary text-white">
+                <h3>{{ tasks|selectattr('priority', 'equalto', 'High')|list|length }}</h3>
+                <p>High Priority Tasks</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card card bg-warning text-dark">
+                <h3>{{ tasks|selectattr('priority', 'equalto', 'Medium')|list|length }}</h3>
+                <p>Medium Priority Tasks</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card card bg-success text-white">
+                <h3>{{ tasks|selectattr('priority', 'equalto', 'Low')|list|length }}</h3>
+                <p>Low Priority Tasks</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 add-task-card">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Add New Task
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('add_task') }}" method="POST">
+                        <div class="mb-4">
+                            <label for="title" class="form-label">
+                                <i class="fas fa-heading me-2"></i>Task Title
+                            </label>
+                            <input type="text" class="form-control form-control-lg" 
+                                   id="title" name="title" required 
+                                   placeholder="Enter task title">
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="form-label">
+                                <i class="fas fa-align-left me-2"></i>Description
+                            </label>
+                            <textarea class="form-control" id="description" 
+                                    name="description" rows="4" 
+                                    placeholder="Describe your task here..."></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="priority" class="form-label">
+                                <i class="fas fa-flag me-2"></i>Priority Level
+                            </label>
+                            <select class="form-select form-select-lg" id="priority" name="priority" required>
+                                <option value="" disabled selected>Select priority level</option>
+                                <option value="High" class="text-danger">High Priority</option>
+                                <option value="Medium" class="text-warning">Medium Priority</option>
+                                <option value="Low" class="text-success">Low Priority</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 submit-task-btn">
+                            <i class="fas fa-plus-circle me-2"></i>Create Task
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="mb-4">
+                <i class="fas fa-list-ul me-2"></i>Tasks
+            </h3>
+            {% for task in tasks %}
+            <div class="card task-card mb-3 {% if task.status %}completed-task{% endif %} {{ task.priority.lower() }}-priority">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">{{ task.title }}</h5>
+                        <span class="badge priority-badge bg-{% if task.priority == 'High' %}danger{% elif task.priority == 'Medium' %}warning{% else %}success{% endif %}">
+                            <i class="fas fa-flag me-1"></i>{{ task.priority }}
+                        </span>
+                    </div>
+                    <p class="card-text mt-2">{{ task.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Created: {{ task.created_date.strftime('%Y-%m-%d %H:%M') }}</small>
+                        <div class="btn-group">
+                            <a href="{{ url_for('toggle_task', id=task.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas {% if task.status %}fa-undo{% else %}fa-check{% endif %} me-1"></i>
+                                {% if task.status %}Mark Pending{% else %}Mark Complete{% endif %}
+                            </a>
+                            <a href="{{ url_for('edit_task', id=task.id) }}" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </a>
+                            <a href="{{ url_for('delete_task', id=task.id) }}" 
+                               class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('Are you sure you want to delete this task?')">
+                                <i class="fas fa-trash-alt me-1"></i>Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>No tasks found. Create your first task!
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

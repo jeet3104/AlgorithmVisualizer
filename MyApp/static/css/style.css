@@ -1,0 +1,438 @@
+/* Base Typography */
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2d3748;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1a202c;
+}
+
+/* Task Header Styles */
+.task-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-header h1 {
+    font-weight: 700;
+    font-size: 2.75rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+.task-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    opacity: 0.95;
+    max-width: 800px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+/* Card Typography */
+.card-header h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.card-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Stats Card Typography */
+.stats-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.stats-card p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+/* Form Typography */
+.form-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #2d3748;
+}
+
+.form-control {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Priority Badge Typography */
+.priority-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.02em;
+}
+
+/* Button Typography */
+.btn {
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.btn-sm {
+    font-size: 0.85rem;
+}
+
+/* Footer Typography */
+footer {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Task List Section */
+.task-list-header {
+    margin-bottom: 2rem;
+}
+
+.task-list-header h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+/* Status Text */
+.text-muted {
+    font-size: 0.85rem;
+    color: #718096 !important;
+}
+
+/* Alert Typography */
+.alert {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-card {
+    border-left: 4px solid transparent;
+}
+
+.task-card.high-priority {
+    border-left-color: #dc3545;
+}
+
+.task-card.medium-priority {
+    border-left-color: #ffc107;
+}
+
+.task-card.low-priority {
+    border-left-color: #28a745;
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+}
+
+.completed-task {
+    opacity: 0.7;
+}
+
+.completed-task .card-title {
+    text-decoration: line-through;
+}
+
+.stats-card {
+    text-align: center;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Add Task Card Styles */
+.add-task-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.add-task-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.add-task-card .card-header {
+    background: linear-gradient(45deg, #4776E6, #8E54E9);
+    border-bottom: none;
+    padding: 1.25rem;
+}
+
+.add-task-card .card-body {
+    padding: 1.5rem;
+}
+
+/* Form Controls Styling */
+.add-task-card .form-control,
+.add-task-card .form-select {
+    border: 2px solid #e2e8f0;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+}
+
+.add-task-card .form-control:focus,
+.add-task-card .form-select:focus {
+    border-color: #4776E6;
+    box-shadow: 0 0 0 0.2rem rgba(71, 118, 230, 0.1);
+    background-color: #fff;
+}
+
+.add-task-card .form-control::placeholder {
+    color: #a0aec0;
+}
+
+.add-task-card .form-label {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.add-task-card .form-label i {
+    color: #4776E6;
+}
+
+/* Priority Select Styling */
+.add-task-card .form-select option {
+    padding: 10px;
+    font-weight: 500;
+}
+
+.add-task-card .form-select option[value="High"] {
+    color: #dc3545;
+}
+
+.add-task-card .form-select option[value="Medium"] {
+    color: #ffc107;
+}
+
+.add-task-card .form-select option[value="Low"] {
+    color: #28a745;
+}
+
+/* Submit Button Styling */
+.submit-task-btn {
+    background: linear-gradient(45deg, #4776E6, #8E54E9);
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.submit-task-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(71, 118, 230, 0.2);
+}
+
+.submit-task-btn:active {
+    transform: translateY(0);
+}
+
+/* Animation for form elements */
+.add-task-card .form-control,
+.add-task-card .form-select,
+.submit-task-btn {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-task-card {
+        margin-bottom: 2rem;
+    }
+    
+    .add-task-card .card-body {
+        padding: 1.25rem;
+    }
+    
+    .submit-task-btn {
+        padding: 0.75rem;
+    }
+}
+
+/* Enhanced Header Styles */
+.task-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.concept-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.concept-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.concept-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+}
+
+.feature-list {
+    display: grid;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments for the concept box */
+@media (max-width: 768px) {
+    .task-header {
+        padding: 3rem 0;
+    }
+
+    .concept-box {
+        padding: 1.5rem !important;
+    }
+
+    .feature-item {
+        padding: 0.75rem;
+    }
+
+    .feature-icon {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .feature-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .feature-item p {
+        font-size: 0.9rem;
+    }
+} 
