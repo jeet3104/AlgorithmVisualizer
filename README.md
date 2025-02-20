@@ -62,9 +62,9 @@ Follow these steps to set up and run the project on your local machine.
 
 ## Screenshots
 
-![Home Page](screenshots/home_page.png)
-![Add Task](screenshots/add_task.png)
-![Edit Task](screenshots/edit_task.png)
+![Home Page]
+![Add Task]
+![Edit Task]
 
 ## Contributing
 
